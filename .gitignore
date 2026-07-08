@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Data (persistent volumes are populated at runtime)
+backend/data/chroma/*
+!backend/data/chroma/.gitkeep
+backend/data/db/*
+!backend/data/db/.gitkeep
+
+# Do NOT ignore the source PDFs (they are the corpus)
+!backend/data/documents/*.pdf
+
+# Internal working docs
+docs/IMPLEMENTATION_PLAN.md
+
+# Logs
+*.log
+logs/
+
+# Benchmark artifacts
+benchmarks/results/*.json
+benchmarks/results/*.csv
+!benchmarks/results/.gitkeep
+
+# Locust artifacts
+loadtests/reports/*
+!loadtests/reports/.gitkeep

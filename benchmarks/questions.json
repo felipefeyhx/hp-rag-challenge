@@ -1,0 +1,151 @@
+{
+  "version": "1.0",
+  "corpus": ["c06584210.pdf", "pdf_10301542_en-US-1.pdf"],
+  "page_tolerance": 2,
+  "notes": "Expected pages are inclusive; retrieval is considered a hit if any retrieved chunk lands within +/- page_tolerance of any expected page in the same document.",
+  "items": [
+    {
+      "id": "q01",
+      "category": "factual",
+      "question": "What is the paper tray capacity of the HP ENVY 6000?",
+      "expected_source": "c06584210.pdf",
+      "expected_pages": [118],
+      "reference_answer": "Up to 80 plain paper sheets, 10 envelopes, 40 index cards, and 30 photo paper sheets."
+    },
+    {
+      "id": "q02",
+      "category": "instruction",
+      "question": "How do I connect the printer to a Wi-Fi network?",
+      "expected_source": "c06584210.pdf",
+      "expected_pages": [33, 34, 35, 36, 37, 38],
+      "reference_answer": "Ensure a wireless 802.11b/g/n network with SSID and password, install HP Smart from 123.hp.com, then follow the on-screen wireless setup steps on the printer."
+    },
+    {
+      "id": "q03",
+      "category": "factual",
+      "question": "What is the model number of this printer?",
+      "expected_source": "c06584210.pdf",
+      "expected_pages": [120, 121],
+      "reference_answer": "The regulatory model number is SNPRC-1807-01. This is different from the product number and marketing name."
+    },
+    {
+      "id": "q04",
+      "category": "factual",
+      "question": "What operating systems does the HP ENVY 6000 support?",
+      "expected_source": "c06584210.pdf",
+      "expected_pages": [118, 119],
+      "reference_answer": "Windows and macOS; specific supported versions are listed in the specifications section."
+    },
+    {
+      "id": "q05",
+      "category": "instruction",
+      "question": "How do I replace the ink cartridges?",
+      "expected_source": "c06584210.pdf",
+      "expected_pages": [60, 61, 62, 63, 64, 65],
+      "reference_answer": "Power on the printer, open the front access door, wait for the carriage to stop, press the tab to release the old cartridge, then insert the new cartridge and close the door."
+    },
+    {
+      "id": "q06",
+      "category": "factual",
+      "question": "What are the environmental operating conditions of the printer?",
+      "expected_source": "c06584210.pdf",
+      "expected_pages": [118, 119],
+      "reference_answer": "Recommended operating temperature is around 15-30 degrees C, with recommended humidity around 20-80% non-condensing."
+    },
+    {
+      "id": "q07",
+      "category": "cross-doc",
+      "question": "Which of the two products is a laptop?",
+      "expected_source": "pdf_10301542_en-US-1.pdf",
+      "expected_pages": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "reference_answer": "The HP OMEN 17.3-inch Gaming Laptop is the laptop; the HP ENVY 6000 is a printer."
+    },
+    {
+      "id": "q08",
+      "category": "factual",
+      "question": "What CPU options are available for the HP OMEN 17.3 laptop?",
+      "expected_source": "pdf_10301542_en-US-1.pdf",
+      "expected_pages": [4, 5, 6, 7, 8, 9, 10],
+      "reference_answer": "The maintenance guide lists supported Intel processors (Core i5 or Core i7 variants) available for the OMEN 17.3-inch laptop; specifics are in the product description chapter."
+    },
+    {
+      "id": "q09",
+      "category": "instruction",
+      "question": "How do I remove the back cover of the OMEN 17.3 laptop for servicing?",
+      "expected_source": "pdf_10301542_en-US-1.pdf",
+      "expected_pages": [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+      "reference_answer": "Remove the screws securing the bottom cover as described in the disassembly section, then lift the cover away from the chassis, being careful not to damage the ribbon cables."
+    },
+    {
+      "id": "q10",
+      "category": "factual",
+      "question": "How much memory (RAM) can the OMEN 17.3 laptop support?",
+      "expected_source": "pdf_10301542_en-US-1.pdf",
+      "expected_pages": [4, 5, 6, 7, 8, 9, 10, 11, 12],
+      "reference_answer": "The OMEN 17.3-inch supports DDR4 memory in two SODIMM slots; consult the product description for maximum capacity."
+    },
+    {
+      "id": "q11",
+      "category": "factual",
+      "question": "What USB port types are on the HP ENVY 6000 printer?",
+      "expected_source": "c06584210.pdf",
+      "expected_pages": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+      "reference_answer": "The HP ENVY 6000 exposes a USB rear-panel port used for a direct computer connection or setup."
+    },
+    {
+      "id": "q12",
+      "category": "instruction",
+      "question": "How do I clear a paper jam on the HP ENVY 6000?",
+      "expected_source": "c06584210.pdf",
+      "expected_pages": [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90],
+      "reference_answer": "Turn the printer off, remove the paper tray, gently pull out any jammed paper, check inside the printer, then reinsert the tray and turn the printer back on."
+    },
+    {
+      "id": "q13",
+      "category": "factual",
+      "question": "What is the print resolution of the HP ENVY 6000 in dots per inch?",
+      "expected_source": "c06584210.pdf",
+      "expected_pages": [118, 119, 120],
+      "reference_answer": "Up to 4800 x 1200 optimized dpi color when printing from a computer on premium photo paper."
+    },
+    {
+      "id": "q14",
+      "category": "instruction",
+      "question": "How do I run the built-in printer alignment procedure?",
+      "expected_source": "c06584210.pdf",
+      "expected_pages": [90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110],
+      "reference_answer": "Use the HP Smart app or the printer control panel to launch cartridge alignment, then follow the on-screen or scanned-page steps to complete."
+    },
+    {
+      "id": "q15",
+      "category": "factual",
+      "question": "What is the noise emission level of the HP ENVY 6000 when printing?",
+      "expected_source": "c06584210.pdf",
+      "expected_pages": [118, 119, 120],
+      "reference_answer": "Sound power emission is around 6-7 bels; specific values for print and idle modes appear in the technical specifications."
+    },
+    {
+      "id": "q16",
+      "category": "off-topic",
+      "question": "What is the current weather in New York City?",
+      "should_refuse": true,
+      "reference_answer": "The chatbot should decline, saying it does not have this information in the provided HP documents."
+    },
+    {
+      "id": "q17",
+      "category": "off-topic",
+      "question": "Write a Python function to compute the Fibonacci sequence.",
+      "should_refuse": true,
+      "reference_answer": "The chatbot should decline programming help unrelated to HP products."
+    },
+    {
+      "id": "q18",
+      "category": "follow-up",
+      "question": "How much does the paper tray weigh?",
+      "expected_source": "c06584210.pdf",
+      "expected_pages": [118, 119, 120],
+      "reference_answer": "The maintenance guide lists product weight rather than paper tray weight specifically; the retrieval should surface the specifications page.",
+      "note": "This one has no direct answer in the corpus, but retrieval should still find the specs page."
+    }
+  ]
+}

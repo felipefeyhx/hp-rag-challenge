@@ -1,0 +1,91 @@
+services:
+  # Local LLM runtime. Not exposed to the host — only reachable from other
+  # services on the compose network. Models live in a named volume so they
+  # survive `docker compose down`.
+  ollama:
+    image: ollama/ollama:latest
+    container_name: hp-rag-ollama
+    volumes:
+      - ollama_models:/root/.ollama
+    environment:
+      # Serve N concurrent generations per model (each slot allocates its own
+      # KV cache; keep this modest on 8 GB VRAM). Raise on beefier GPUs.
+      - OLLAMA_NUM_PARALLEL=2
+      # Keep models resident so we don't pay reload cost between idle windows.
+      - OLLAMA_KEEP_ALIVE=24h
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ollama list >/dev/null 2>&1"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    restart: unless-stopped
+    # Uncomment the deploy block below to enable GPU acceleration (requires
+    # NVIDIA Container Toolkit on the host). Ollama uses CPU by default.
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  # One-shot init container. Pulls the chat and embedding models on first
+  # boot, then exits. Idempotent — subsequent starts finish in a couple of
+  # seconds because the models are already in the shared volume.
+  #
+  # Model tags are hardcoded here to match backend/app/config.py.
+  # Changing them requires updating both places.
+  ollama-pull:
+    image: ollama/ollama:latest
+    container_name: hp-rag-ollama-pull
+    depends_on:
+      ollama:
+        condition: service_healthy
+    volumes:
+      - ollama_models:/root/.ollama
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    entrypoint: >
+      sh -c "
+        echo '==> pulling chat model: qwen2.5:7b-instruct' &&
+        ollama pull qwen2.5:7b-instruct &&
+        echo '==> pulling embedding model: nomic-embed-text' &&
+        ollama pull nomic-embed-text &&
+        echo '==> models ready.'
+      "
+    restart: "no"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: hp-rag-backend
+    env_file:
+      - .env
+    environment:
+      # Override .env so the backend container talks to the ollama service on
+      # the compose network, not the host.
+      - LLM_BASE_URL=http://ollama:11434/v1
+      - EMBEDDING_BASE_URL=http://ollama:11434/v1
+    depends_on:
+      ollama:
+        condition: service_healthy
+      ollama-pull:
+        condition: service_completed_successfully
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/data/chroma:/app/data/chroma
+      - ./backend/data/db:/app/data/db
+      - ./backend/data/documents:/app/data/documents:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 120s
+    restart: unless-stopped
+
+volumes:
+  ollama_models:
