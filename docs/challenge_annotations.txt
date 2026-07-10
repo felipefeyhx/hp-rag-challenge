@@ -1,0 +1,43 @@
+RAG Engine:
+
+Principels:
+- The chat will only be used to ask questions that the content has in the docs
+- The user will only talk in english
+- I will not worry now about requests limit
+- I will not worry now about security - only preserving the hp docs info 
+- I will not worry now about authentication methods 
+
+-> About the documents to process
+
+    - Looks like the pdfs are text based, so we can extract text easly using pypdfLoader
+
+    - Image handling - i read in the documents that are images but the icons and images are self explanatory since it refers to icons using text like: (Power connection/ Power button)
+
+    - If we need eventually image handling i would switch for a multimodal rag using CLIP text encoder or some ocr tool
+
+    - I went with recursive character splitting (800 chars, 120 overlap) because the HP docs are structured manuals with clear paragraphs, numbered steps, and bullet lists - the recursive separator order ("\n\n" -> "\n" -> ". ") naturally breaks on those boundaries
+
+-> About the questions:
+    - I noticed that the chatbot using topk, but if i want to summarize the document asking for a resume it may not work sometimes, should probably detect the summarization intent and switch strategy - instead of retrieving just the top-k chunks, run a map-reduce/refine over all the chunks (or feed the whole document), since a summary needs the full text and not only the few most similar pieces
+
+-> About the embeddings / language
+    - Since the full challenge is in english, the documents and the user's questions should will be in english too, so i don't need a heavier multilingual embedding model - an english-primary one like nomic-embed-text is enough
+
+-> About the frontend
+    - I could use react or another frontend tool to show a most beautiful screen but it will just add some complexity that i don't need to beware now 
+
+-> About the login method
+    - Another thing that I could try to implement, but also the challenge doesn't require login methods 
+
+-> About the security 
+    - I've first consider using gpt-4o-mini cause its really easy to implement using openai api, but it won't be a good fit for the challenge since it's a not security method - the questions and the document chunks would be sent to OpenAI's servers, so the data leaves the machine. Going local with Ollama keeps everything on-premise (nothing leaves the machine), which is the safer and more private choice for this challenge
+    - I've could open an cloud provided llm, but i just will spend more time setting this up in a cloud than just use a local model, since my machine supports gpu accelaration well, also i consider using a local llm more innovator
+
+-> About the chat 
+  - Chat was made to respond only context from hp documents, in some tests i ask the model to implement a hello world in python, in a new session it refuses, but if i ask in a history session, it will write. I will need a time to understand why its happenning
+
+-> About the benchmark 
+  - I need to change the llm as a judge method using a powerfull model
+
+-> About the load_test
+  - I would need to swap to another computer with another hardware to run and make another proof
